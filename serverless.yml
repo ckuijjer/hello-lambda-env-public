@@ -1,0 +1,37 @@
+service: hello-lambda-env-public
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  environment:
+    ENV_TEST_MESSAGE: 1st deploy
+    ENV_TEST_A: 1
+
+    # ENV_TEST_MESSAGE: 2nd deploy
+    # ENV_TEST_B: 2
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - http:
+          path: /
+          method: get
+
+custom:
+  esbuild:
+    minify: false
+    bundle: true
+    sourcemap: true
+    watch:
+      pattern: ['src/**/*.ts']
+      ignore: ['.serverless/**/*', '.build', '.esbuild']
+    packager: yarn
+  output:
+    file: stack.json
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+  - serverless-stack-output

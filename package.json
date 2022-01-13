@@ -1,0 +1,28 @@
+{
+  "name": "hello-lambda-env-public",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "aws-lambda": "^1.0.7",
+    "esbuild": "^0.14.11",
+    "k6": "^0.0.0",
+    "lumigo-cli": "^0.48.4",
+    "serverless": "^2.71.0",
+    "serverless-esbuild": "^1.23.3",
+    "serverless-offline": "^8.3.1",
+    "serverless-stack-output": "^0.2.3"
+  },
+  "scripts": {
+    "start": "serverless offline",
+    "deploy": "serverless deploy",
+    "package": "serverless package",
+    "remove:sls": "serverless remove",
+    "tail-cloudwatch-logs": "lumigo-cli tail-cloudwatch-logs -n /aws/lambda/hello-lambda-env",
+    "prettify-log": "awk -F'\\t' '{if ($5 && $5 ~ /^{/ && !system(\"echo \\x27\" $5 \"\\x27 | jq -e > /dev/null 2>&1\")) { print $1\"\\t\"$2\"\\t\"$3\"\\t\"$4; system(\"echo \\x27\" $5 \"\\x27 | jq\") } else { print $0 }}'",
+    "log": "yarn tail-cloudwatch-logs",
+    "k6:query": "k6 run k6-query.js",
+    "k6:query:debug": "k6 run k6-query.js --http-debug=\"full\"",
+    "k6:query:during-deploy": "yarn k6:query & yarn deploy"
+  }
+}
