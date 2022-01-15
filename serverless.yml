@@ -5,11 +5,7 @@ provider:
   runtime: nodejs12.x
   region: eu-west-1
   environment:
-    ENV_TEST_MESSAGE: 1st deploy
-    ENV_TEST_A: 1
-
-    # ENV_TEST_MESSAGE: 2nd deploy
-    # ENV_TEST_B: 2
+    MESSAGE: ${file(./src/message.json):message}
 
 functions:
   hello:
@@ -18,6 +14,9 @@ functions:
       - http:
           path: /
           method: get
+    deploymentSettings:
+      type: AllAtOnce
+      alias: live
 
 custom:
   esbuild:
@@ -34,4 +33,5 @@ custom:
 plugins:
   - serverless-esbuild
   - serverless-offline
+  # - serverless-plugin-canary-deployments
   - serverless-stack-output

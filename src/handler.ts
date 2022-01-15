@@ -1,12 +1,9 @@
-export const hello = async () => {
-  const envTestVariables = Object.fromEntries(
-    Object.entries(process.env).filter(([key]) => key.startsWith('ENV_TEST_')),
-  );
+import { message } from './message.json';
 
+export const hello = async () => {
   const payload = {
-    message: '1st deploy',
-    // message: '2nd deploy',
-    envTestVariables,
+    lambda: message,
+    environment: process.env.MESSAGE,
   };
 
   console.log('payload', payload);

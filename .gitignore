@@ -2,3 +2,5 @@ node_modules
 .serverless
 .vscode
 stack.json
+.esbuild
+yarn-error.log
