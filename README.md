@@ -1,5 +1,9 @@
 # hello-lambda-env-public
 
+Example showing the issue of changing a lambda's environment variables and changing a lamba's code not happening at the same moment, see https://awsteele.com/blog/2020/12/24/aws-lambda-latest-is-dangerous.html for background information
+
+## Steps
+
 - Use `yarn deploy` to make the initial deploy
 - Use `yarn query` to make an initial call to the endpoint
 - Change _src/message.json_ to change the message set in the handler and environment variable
