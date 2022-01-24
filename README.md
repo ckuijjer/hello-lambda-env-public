@@ -12,7 +12,7 @@ Example showing the issue of changing a lambda's environment variables and chang
 - Change serverless.yml and uncomment the `# - serverless-plugin-canary-deployments` line to use AWS CodeDeploy
 - Change _src/message.json_ to change the message set in the handler and environment variable
 - Use `k6:query:during-deploy` to make several API requests while deploying the stack
-- Use the CloudWatch Insights query below and note the message from the lambda and environment will be different for some requests. I think this will only happen on the first deployment with AWS CodeBuild switching the _live_ alias.
+- Use the CloudWatch Insights query below and note the message from the lambda and environment will be different for some requests. I think this will only happen on the first deployment with AWS CodeDeploy switching the _live_ alias.
 - Change _src/message.json_ to change the message set in the handler and environment variable
 - Use `k6:query:during-deploy` to make several API requests while deploying the stack
 - Use the CloudWatch Insights query below and note the message from the lambda and environment won't be different anymore.
